@@ -1,0 +1,19 @@
+---
+- name: Install IPA client
+  yum: name=ipa-client state=latest
+
+- name: Install OpenLDAP client
+  yum: name=openldap-clients state=latest
+
+- name: Build IPA setup and enrollment script
+  template: src=join.sh dest=/tmp/join.sh mode=0700 owner=root
+
+- name: Enroll the machine
+  command: /tmp/join.sh
+           creates = /var/ipa.ok
+
+- name: Ensure that SSSD is started
+  service: name=sssd enabled=yes state=started
+
+- name: Ensure that Certmonger is started
+  service: name=certmonger enabled=yes state=started

@@ -1,0 +1,11 @@
+# Create the host entries in the IPA server before running this playbook
+- hosts: myhosts
+  user : root
+  vars:
+    ipa_domain: foo.com
+    ipa_server: ipa.foo.com
+    ipa_admin: admin
+    ipa_password: asecretpassword
+    ntp_server: 192.168.1.1
+  roles:
+    - ipa-client
