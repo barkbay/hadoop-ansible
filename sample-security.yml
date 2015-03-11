@@ -1,4 +1,4 @@
-# Create the host entries in the IPA server before running this playbook
+# WARNING : You have to create host entries in the IPA server before running this playbook
 - hosts: myhosts
   user : root
   vars:
